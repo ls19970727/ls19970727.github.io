@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>牛客题解-NC134股票（无限次交易） | 程序员评测室</title><meta name="keywords" content="Java,贪心"><meta name="author" content="Shun Liu"><meta name="copyright" content="Shun Liu"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="题目假定你知道某只股票每一天价格的变动。 你最多可以同时持有一只股票。但你可以无限次的交易（买进和卖出均无手续费）。 请设计一个函数，计算你所能获得的最大收益。 示例1输入： 1[5,4,3,2,1]  输出： 10  tips： 1由于每天股票都在跌，因此不进行任何交易最优。最大收益为0。  示例2输入： 1[1,2,3,4,5]  输出： 14  tips： 12第一天买进，最后一天卖出最优。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="牛客题解-NC134股票（无限次交易）">
+<meta property="og:url" content="http://example.com/2020/07/04/202074-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC134%E8%82%A1%E7%A5%A8%EF%BC%88%E6%97%A0%E9%99%90%E6%AC%A1%E4%BA%A4%E6%98%93%EF%BC%89/index.html">
+<meta property="og:site_name" content="程序员评测室">
+<meta property="og:description" content="题目假定你知道某只股票每一天价格的变动。 你最多可以同时持有一只股票。但你可以无限次的交易（买进和卖出均无手续费）。 请设计一个函数，计算你所能获得的最大收益。 示例1输入： 1[5,4,3,2,1]  输出： 10  tips： 1由于每天股票都在跌，因此不进行任何交易最优。最大收益为0。  示例2输入： 1[1,2,3,4,5]  输出： 14  tips： 12第一天买进，最后一天卖出最优。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png">
+<meta property="article:published_time" content="2020-07-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-26T14:37:51.885Z">
+<meta property="article:author" content="Shun Liu">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="贪心">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2020/07/04/202074-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC134%E8%82%A1%E7%A5%A8%EF%BC%88%E6%97%A0%E9%99%90%E6%AC%A1%E4%BA%A4%E6%98%93%EF%BC%89/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/pwa/manifest.json"/><link rel="apple-touch-icon" sizes="180x180" href="/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/pwa/16.png"/><link rel="mask-icon" href="/pwa/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Shun Liu","link":"链接: ","source":"来源: 程序员评测室","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '牛客题解-NC134股票（无限次交易）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-03-26 22:37:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><style type="text/css">#toggle-sidebar {left:100px}</style><style type="text/css">.app-refresh{position:fixed;top:-2.2rem;left:0;right:0;z-index:99999;padding:0 1rem;font-size:15px;height:2.2rem;transition:all .3s ease}.app-refresh-wrap{display:flex;color:#fff;height:100%;align-items:center;justify-content:center}.app-refresh-wrap a{color:#fff;text-decoration:underline;cursor:pointer}</style><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/IMG_4823(20210513-002017).JPG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">45</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photo/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">程序员评测室</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photo/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">牛客题解-NC134股票（无限次交易）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-03T16:00:00.000Z" title="发表于 2020-07-04 00:00:00">2020-07-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-03-26T14:37:51.885Z" title="更新于 2021-03-26 22:37:51">2021-03-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3/">牛客题解</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="牛客题解-NC134股票（无限次交易）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>假定你知道某只股票每一天价格的变动。</p>
+<p>你最多可以同时持有一只股票。但你可以无限次的交易（买进和卖出均无手续费）。</p>
+<p>请设计一个函数，计算你所能获得的最大收益。</p>
+<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>tips：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">由于每天股票都在跌，因此不进行任何交易最优。最大收益为<span class="number">0</span>。</span><br></pre></td></tr></table></figure>
+
+<h2 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h2><p>输入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>tips：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">第一天买进，最后一天卖出最优。中间的当天买进当天卖出不影响最终结果。最大收益为<span class="number">4</span>。  </span><br><span class="line">总天数不大于<span class="number">200000</span>。保证股票每一天的价格在[<span class="number">1</span>,<span class="number">100</span>]范围内。</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定义dp[i][0]表示第i+1天交易完之后手里没有股票的最大利润，dp[i][1]表示第i+1天交易完之后手里持有股票的最大利润。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>当天交易完之后手里没有股票可能有两种情况，一种是当天没有进行任何交易</strong>，又因为当天手里没有股票，所以当天没有股票的利润只能取前一天手里没有股票的利润。<strong>一种是把当天手里的股票给卖了</strong>，既然能卖，说明手里是有股票的，所以这个时候当天没有股票的利润要取前一天手里有股票的利润加上当天股票能卖的价格。这两种情况我们取利润最大的即可，所以可以得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][0]=max(dp[i-1][0],dp[i-1][1]+prices[i]);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>当天交易完之后手里持有股票也有两种情况，一种是当天没有任何交易</strong>，又因为当天手里持有股票，所以当天手里持有的股票其实前一天就已经持有了。<strong>还一种是当天买入了股票</strong>，当天能卖股票，说明前一天手里肯定是没有股票的，我们取这两者的最大值，所以可以得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][1]=max(dp[i-1][1],dp[i-1][0]-prices[i]);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>动态规划的递推公式有了，那么边界条件是什么，就是第一天</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">如果买入：dp[0][1]=-prices[0];</span><br><span class="line">如果没买：dp[0][0]=0;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>有了递推公式和边界条件，代码很容易就写出来了</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可</span></span><br><span class="line"><span class="comment">     * 计算最大收益</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> prices int整型一维数组 股票每一天的价格</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span> <span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        <span class="keyword">if</span>(prices == <span class="keyword">null</span> || prices.length &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[prices.length][<span class="number">2</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = -prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; prices.length; i++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">0</span>], dp[i-<span class="number">1</span>][<span class="number">1</span>] + prices[i]);</span><br><span class="line">            dp[i][<span class="number">1</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">1</span>], dp[i-<span class="number">1</span>][<span class="number">0</span>] - prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[prices.length - <span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Shun Liu</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2020/07/04/202074-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC134%E8%82%A1%E7%A5%A8%EF%BC%88%E6%97%A0%E9%99%90%E6%AC%A1%E4%BA%A4%E6%98%93%EF%BC%89/">http://example.com/2020/07/04/202074-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC134%E8%82%A1%E7%A5%A8%EF%BC%88%E6%97%A0%E9%99%90%E6%AC%A1%E4%BA%A4%E6%98%93%EF%BC%89/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">程序员评测室</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/%E8%B4%AA%E5%BF%83/">贪心</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/5DC284038A8154B766E8DA2B0C5F6425.png" target="_blank"><img class="post-qr-code-img" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/5DC284038A8154B766E8DA2B0C5F6425.png" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/alipay.png" target="_blank"><img class="post-qr-code-img" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/alipay.png" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/04/202074-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC8%E4%BA%8C%E5%8F%89%E6%A0%91%E8%B7%AF%E5%BE%84%E4%B9%8B%E5%92%8C/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">牛客题解-NC8二叉树路径之和</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/03/202073-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC135%E8%82%A1%E7%A5%A8%EF%BC%88%E4%B8%A4%E6%AC%A1%E4%BA%A4%E6%98%93%EF%BC%89/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">牛客题解-NC135股票（两次交易）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/06/22/2020622-牛客题解-NC37/" title="牛客题解-NC37合并区间"><img class="cover" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-22</div><div class="title">牛客题解-NC37合并区间</div></div></a></div><div><a href="/2020/06/24/2020623-牛客题解-NC54数组中相加和为0三元组/" title="牛客题解-NC54数组中相加和为0三元组"><img class="cover" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-24</div><div class="title">牛客题解-NC54数组中相加和为0三元组</div></div></a></div><div><a href="/2020/06/23/2020623-牛客题解-NC61两数之和/" title="牛客题解-NC61两数之和"><img class="cover" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-23</div><div class="title">牛客题解-NC61两数之和</div></div></a></div><div><a href="/2020/06/24/2020624-牛客题解-NC65斐波那契数列/" title="牛客题解-NC65斐波那契数列"><img class="cover" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-24</div><div class="title">牛客题解-NC65斐波那契数列</div></div></a></div><div><a href="/2020/06/25/2020625-牛客题解-NC144不相邻最大子序列和/" title="牛客题解-NC144不相邻最大子序列和"><img class="cover" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-25</div><div class="title">牛客题解-NC144不相邻最大子序列和</div></div></a></div><div><a href="/2020/06/25/2020625-牛客题解-NC66两个链表的第一个公共节点/" title="牛客题解-NC66两个链表的第一个公共节点"><img class="cover" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-25</div><div class="title">牛客题解-NC66两个链表的第一个公共节点</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/IMG_4823(20210513-002017).JPG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Shun Liu</div><div class="author-info__description">欢迎一起交流学习！</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">38</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">45</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ls19970727"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/ls19970727" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:shunliu@csu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.zhihu.com/people/liu-shun-29-79" target="_blank" title="Zhihu"><i class="fab fa-zhihu"></i></a><a class="social-icon" href="https://weibo.com/u/5648763753" target="_blank" title="Weibo"><i class="fab fa-weibo"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">2021-05-18 主题更新!,Welcome to my blog!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1"><span class="toc-number">1.1.</span> <span class="toc-text">示例1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B2"><span class="toc-number">1.2.</span> <span class="toc-text">示例2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">思路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-number">2.1.</span> <span class="toc-text">分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">实现</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/05/18/%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC68%E8%B7%B3%E5%8F%B0%E9%98%B6/" title="牛客题解-NC68跳台阶"><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/niuke1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="牛客题解-NC68跳台阶"/></a><div class="content"><a class="title" href="/2021/05/18/%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC68%E8%B7%B3%E5%8F%B0%E9%98%B6/" title="牛客题解-NC68跳台阶">牛客题解-NC68跳台阶</a><time datetime="2021-05-18T08:36:26.613Z" title="发表于 2021-05-18 16:36:26">2021-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/13/2021513-SpringMVC%EF%BC%88%E4%B8%80%EF%BC%89/" title="SpringMVC（一）"><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210513101756.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringMVC（一）"/></a><div class="content"><a class="title" href="/2021/05/13/2021513-SpringMVC%EF%BC%88%E4%B8%80%EF%BC%89/" title="SpringMVC（一）">SpringMVC（一）</a><time datetime="2021-05-12T16:00:00.000Z" title="发表于 2021-05-13 00:00:00">2021-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/08/16/2020816-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6MySQL%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%90%E8%A7%82%E9%94%81vs%E6%82%B2%E8%A7%82%E9%94%81/" title="请教我学MySQL（一）乐观锁vs悲观锁"><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/mysql.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="请教我学MySQL（一）乐观锁vs悲观锁"/></a><div class="content"><a class="title" href="/2020/08/16/2020816-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6MySQL%EF%BC%88%E4%B8%80%EF%BC%89%E4%B9%90%E8%A7%82%E9%94%81vs%E6%82%B2%E8%A7%82%E9%94%81/" title="请教我学MySQL（一）乐观锁vs悲观锁">请教我学MySQL（一）乐观锁vs悲观锁</a><time datetime="2020-08-15T16:00:00.000Z" title="发表于 2020-08-16 00:00:00">2020-08-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/08/15/2020815-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6MySQL%EF%BC%88%E4%B8%80%EF%BC%89%E7%B4%A2%E5%BC%95/" title="请教我学MySQL（一）索引"><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/mysql.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="请教我学MySQL（一）索引"/></a><div class="content"><a class="title" href="/2020/08/15/2020815-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6MySQL%EF%BC%88%E4%B8%80%EF%BC%89%E7%B4%A2%E5%BC%95/" title="请教我学MySQL（一）索引">请教我学MySQL（一）索引</a><time datetime="2020-08-14T16:00:00.000Z" title="发表于 2020-08-15 00:00:00">2020-08-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/08/15/2020815-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89%E8%BF%9B%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="请教我学操作系统（一）进线程与内存管理"><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2@latest/image/caozuoxitong.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="请教我学操作系统（一）进线程与内存管理"/></a><div class="content"><a class="title" href="/2020/08/15/2020815-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%B8%80%EF%BC%89%E8%BF%9B%E7%BA%BF%E7%A8%8B%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" title="请教我学操作系统（一）进线程与内存管理">请教我学操作系统（一）进线程与内存管理</a><time datetime="2020-08-14T16:00:00.000Z" title="发表于 2020-08-15 00:00:00">2020-08-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2021 By Shun Liu</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcom to my <a target="_blank" rel="noopener" href="https://shunliu.xyz/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'kixQ79HAGlwoqAgKcfeOydAz-gzGzoHsz',
+      appKey: 'VprWnESeWQUue30BUvjgd59m',
+      placeholder: '记得留下你的昵称和邮箱....可以快速收到回复',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><div class="aplayer no-destroy" data-id="87532409" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><div class="app-refresh" id="app-refresh"> <div class="app-refresh-wrap"> <label>✨ 网站已更新最新版本 👉</label> <a href="javascript:void(0)" onclick="location.reload()">点击刷新</a> </div></div><script>function showNotification(){if(GLOBAL_CONFIG.Snackbar){var t="light"===document.documentElement.getAttribute("data-theme")?GLOBAL_CONFIG.Snackbar.bgLight:GLOBAL_CONFIG.Snackbar.bgDark,e=GLOBAL_CONFIG.Snackbar.position;Snackbar.show({text:"已更新最新版本",backgroundColor:t,duration:5e5,pos:e,actionText:"点击刷新",actionTextColor:"#fff",onActionClick:function(t){location.reload()}})}else{var o=`top: 0; background: ${"light"===document.documentElement.getAttribute("data-theme")?"#49b1f5":"#1f1f1f"};`;document.getElementById("app-refresh").style.cssText=o}}"serviceWorker"in navigator&&(navigator.serviceWorker.controller&&navigator.serviceWorker.addEventListener("controllerchange",function(){showNotification()}),window.addEventListener("load",function(){navigator.serviceWorker.register("/sw.js")}));</script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener toc scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
