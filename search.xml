@@ -171,6 +171,34 @@
       </tags>
   </entry>
   <entry>
+    <title>牛客题解-NC90设计getMin功能的栈</title>
+    <url>/2020/06/26/2020626-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC90%E8%AE%BE%E8%AE%A1getMin%E5%8A%9F%E8%83%BD%E7%9A%84%E6%A0%88/</url>
+    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>实现一个特殊功能的栈，在实现栈的基本功能的基础上，再实现返回栈中最小元素的操作。</p>
+<p>输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[[1,3],[1,2],[1,1],[3],[2],[3]]</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[1,2]</span><br></pre></td></tr></table></figure>
+
+<p>Tips：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">有三种操作种类，op1表示push，op2表示pop，op3表示getMin。你需要返回和op3出现次数一样多的数组，表示每次getMin的答案</span><br><span class="line"></span><br><span class="line">1&lt;=操作总数&lt;=1000000</span><br><span class="line">-1000000&lt;=每个操作数&lt;=1000000</span><br><span class="line">数据保证没有不合法的操作</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>该题目重点在于获取当前栈中的min值。</p>
+<p>考虑为原栈stack1，新建一个stack2栈用来维持stack1中的最小数。由于栈FILO的特性，只需要保证stack2中的栈顶元素维持在一个最小值水平即可。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * return a array which include all ans for op3</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> op int整型二维数组 operator</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型一维数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] getMinStack (<span class="keyword">int</span>[][] op) &#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        Stack&lt;Integer&gt; s1 = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        Stack&lt;Integer&gt; s2 = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> flag;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;op.length; i++)&#123;</span><br><span class="line">            flag = op[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">if</span>(flag == <span class="number">1</span>)&#123;</span><br><span class="line">                s1.push(op[i][<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">if</span>(s2.isEmpty() || s2.peek() &gt;= op[i][<span class="number">1</span>])&#123;</span><br><span class="line">                    s2.push(op[i][<span class="number">1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(flag == <span class="number">2</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span> value = s1.pop();</span><br><span class="line">                <span class="keyword">if</span>(value == s2.peek())&#123;</span><br><span class="line">                    s2.pop();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(flag == <span class="number">3</span>)&#123;</span><br><span class="line">                list.add(s2.peek());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[list.size()];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;list.size(); j++)&#123;</span><br><span class="line">            res[j] = list.get(j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>牛客题解</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>牛客题解-NC66两个链表的第一个公共节点</title>
     <url>/2020/06/25/2020625-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC66%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/</url>
     <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）</p>
@@ -218,23 +246,18 @@
       </tags>
   </entry>
   <entry>
-    <title>牛客题解-NC90设计getMin功能的栈</title>
-    <url>/2020/06/26/2020626-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC90%E8%AE%BE%E8%AE%A1getMin%E5%8A%9F%E8%83%BD%E7%9A%84%E6%A0%88/</url>
-    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>实现一个特殊功能的栈，在实现栈的基本功能的基础上，再实现返回栈中最小元素的操作。</p>
-<p>输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[[1,3],[1,2],[1,1],[3],[2],[3]]</span><br></pre></td></tr></table></figure>
+    <title>牛客题解-NC17最长回文子串</title>
+    <url>/2020/06/28/2020628-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC17%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</url>
+    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>对于一个字符串，请设计一个高效算法，计算其中最长回文子串的长度。</p>
+<p>给定字符串<strong>A</strong>以及它的长度<strong>n</strong>，请返回最长回文子串的长度。</p>
+<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;abc1234321ab&quot;</span>,<span class="number">12</span></span><br></pre></td></tr></table></figure>
 
 <p>输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[1,2]</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
 
-<p>Tips：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">有三种操作种类，op1表示push，op2表示pop，op3表示getMin。你需要返回和op3出现次数一样多的数组，表示每次getMin的答案</span><br><span class="line"></span><br><span class="line">1&lt;=操作总数&lt;=1000000</span><br><span class="line">-1000000&lt;=每个操作数&lt;=1000000</span><br><span class="line">数据保证没有不合法的操作</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>该题目重点在于获取当前栈中的min值。</p>
-<p>考虑为原栈stack1，新建一个stack2栈用来维持stack1中的最小数。由于栈FILO的特性，只需要保证stack2中的栈顶元素维持在一个最小值水平即可。</p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * return a array which include all ans for op3</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> op int整型二维数组 operator</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型一维数组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] getMinStack (<span class="keyword">int</span>[][] op) &#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        Stack&lt;Integer&gt; s1 = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        Stack&lt;Integer&gt; s2 = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> flag;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;op.length; i++)&#123;</span><br><span class="line">            flag = op[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">if</span>(flag == <span class="number">1</span>)&#123;</span><br><span class="line">                s1.push(op[i][<span class="number">1</span>]);</span><br><span class="line">                <span class="keyword">if</span>(s2.isEmpty() || s2.peek() &gt;= op[i][<span class="number">1</span>])&#123;</span><br><span class="line">                    s2.push(op[i][<span class="number">1</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(flag == <span class="number">2</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span> value = s1.pop();</span><br><span class="line">                <span class="keyword">if</span>(value == s2.peek())&#123;</span><br><span class="line">                    s2.pop();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(flag == <span class="number">3</span>)&#123;</span><br><span class="line">                list.add(s2.peek());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[list.size()];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j&lt;list.size(); j++)&#123;</span><br><span class="line">            res[j] = list.get(j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210327210613.png"></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLongestPalindrome</span><span class="params">(String A, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[n][n];</span><br><span class="line">        String ans = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; n; l++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i + l &lt; n; ++i)&#123;</span><br><span class="line">                <span class="keyword">int</span> j = i + l;</span><br><span class="line">                <span class="keyword">if</span>(l == <span class="number">0</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(l == <span class="number">1</span>)&#123;</span><br><span class="line">                    dp[i][j] = (A.charAt(i) == A.charAt(j));</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = (dp[i+<span class="number">1</span>][j-<span class="number">1</span>] &amp;&amp; A.charAt(i) == A.charAt(j));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &amp;&amp; l + <span class="number">1</span> &gt; ans.length())&#123;</span><br><span class="line">                    ans = A.substring(i,i+l+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans.length();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -242,7 +265,8 @@
       </categories>
       <tags>
         <tag>Java</tag>
-        <tag>栈</tag>
+        <tag>动态规划</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
@@ -281,30 +305,6 @@
         <tag>Java</tag>
         <tag>树</tag>
         <tag>bfs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>牛客题解-NC17最长回文子串</title>
-    <url>/2020/06/28/2020628-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC17%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</url>
-    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>对于一个字符串，请设计一个高效算法，计算其中最长回文子串的长度。</p>
-<p>给定字符串<strong>A</strong>以及它的长度<strong>n</strong>，请返回最长回文子串的长度。</p>
-<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;abc1234321ab&quot;</span>,<span class="number">12</span></span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210327210613.png"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLongestPalindrome</span><span class="params">(String A, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[n][n];</span><br><span class="line">        String ans = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; n; l++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i + l &lt; n; ++i)&#123;</span><br><span class="line">                <span class="keyword">int</span> j = i + l;</span><br><span class="line">                <span class="keyword">if</span>(l == <span class="number">0</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(l == <span class="number">1</span>)&#123;</span><br><span class="line">                    dp[i][j] = (A.charAt(i) == A.charAt(j));</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = (dp[i+<span class="number">1</span>][j-<span class="number">1</span>] &amp;&amp; A.charAt(i) == A.charAt(j));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &amp;&amp; l + <span class="number">1</span> &gt; ans.length())&#123;</span><br><span class="line">                    ans = A.substring(i,i+l+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans.length();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>牛客题解</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>动态规划</tag>
-        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
@@ -479,6 +479,96 @@
       <tags>
         <tag>Java</tag>
         <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git学习日记（一）安装与时光机</title>
+    <url>/2020/07/22/2020722-Git%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85%E4%B8%8E%E6%97%B6%E5%85%89%E6%9C%BA/</url>
+    <content><![CDATA[<font size = 3>
+
+<h1 id="windows下的安装"><a href="#windows下的安装" class="headerlink" title="windows下的安装"></a>windows下的安装</h1><p>下载安装</p>
+<p>安装完成后配置</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h1><p>版本库又名仓库，英文名<strong>repository</strong>，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。</p>
+<h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><p>首先，选择一个合适的地方，创建一个空目录：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ mkdir learngit<span class="comment">//创建目录</span></span><br><span class="line">$ cd learngit<span class="comment">//切换到刚刚创建的目录下</span></span><br><span class="line">$ pwd<span class="comment">//显示当前所在目录</span></span><br><span class="line">/Users/michael/learngit</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化仓库"><a href="#初始化仓库" class="headerlink" title="初始化仓库"></a>初始化仓库</h2><p>第二步，通过<code>git init</code>命令把这个目录变成Git可以管理的仓库：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git init</span><br><span class="line">Initialized empty Git repository in /Users/michael/learngit/.git/</span><br></pre></td></tr></table></figure>
+
+<p>目录下多了一个<code>.git</code>的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。</p>
+<p>如果你没有看到<code>.git</code>目录，那是因为这个目录默认是隐藏的，用<code>ls -ah</code>命令就可以看见。</p>
+<h2 id="添加文件到版本库"><a href="#添加文件到版本库" class="headerlink" title="添加文件到版本库"></a>添加文件到版本库</h2><p>对于文件编码，如果没有历史遗留问题，强烈建议使用标准的<strong>UTF-8</strong>编码</p>
+<p>不要使用windows子代记事本，下载<a href="http://notepad-plus-plus.org/">Notepad++</a>代替记事本，不但功能强大，而且免费！记得把Notepad++的默认编码设置为UTF-8 without BOM即可。</p>
+<p>在任意位置创建一个txt（readme.txt），添加文本内容。</p>
+<p>第一步，用命令<code>git add</code>告诉Git，把文件添加到仓库：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git add readme.txt</span><br></pre></td></tr></table></figure>
+
+<p>第二步，用命令<code>git commit</code>告诉Git，把文件提交到仓库：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git commit -m <span class="string">&quot;wrote a readme file&quot;</span></span><br><span class="line">[master (root-commit) eaadf4e] wrote a readme file</span><br><span class="line"> <span class="number">1</span> file changed, <span class="number">2</span> insertions(+)</span><br><span class="line"> create mode <span class="number">100644</span> readme.txt</span><br></pre></td></tr></table></figure>
+
+<p><code>-m</code>后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p>
+<p>为什么Git添加文件需要<code>add</code>，<code>commit</code>一共两步呢？因为<code>commit</code>可以一次提交很多文件，所以你可以多次<code>add</code>不同的文件，比如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git add file1.txt</span><br><span class="line">$ git add file2.txt file3.txt</span><br><span class="line">$ git commit -m <span class="string">&quot;add 3 files.&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="时光穿梭"><a href="#时光穿梭" class="headerlink" title="时光穿梭"></a>时光穿梭</h1><h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><p>在实际工作中，我们脑子里怎么可能记得一个几千行的文件每次都改了什么内容，不然要版本控制系统干什么。版本控制系统肯定有某个命令可以告诉我们历史记录，在Git中，我们用<code>git log</code>命令查看。</p>
+<p>要把当前版本<code>append GPL</code>回退到上一个版本<code>add distributed</code>，就可以使用<code>git reset</code>命令：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git reset --hard HEAD^</span><br><span class="line">HEAD is now at e475afc add distributed</span><br></pre></td></tr></table></figure>
+
+<p>指定回到未来的某个版本：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git reset --hard 1094a</span><br><span class="line">HEAD is now at 83b0afe append GPL</span><br></pre></td></tr></table></figure>
+
+<p>版本号没必要写全，前几位就可以了，Git会自动去找。当然也不能只写前一两位，因为Git可能会找到多个版本号，就无法确定是哪一个了。</p>
+<p>Git提供了一个命令<code>git reflog</code>用来记录你的每一次命令：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git reflog</span><br><span class="line">e475afc HEAD@&#123;<span class="number">1</span>&#125;: reset: moving to HEAD^</span><br><span class="line">1094adb (HEAD -&gt; master) HEAD@&#123;<span class="number">2</span>&#125;: commit: append GPL</span><br><span class="line">e475afc HEAD@&#123;<span class="number">3</span>&#125;: commit: add distributed</span><br><span class="line">eaadf4e HEAD@&#123;<span class="number">4</span>&#125;: commit (initial): wrote a readme file</span><br></pre></td></tr></table></figure>
+
+<h2 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a>工作区和暂存区</h2><p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210416202617.png"></p>
+<p>我们把文件往Git版本库里添加的时候，是分两步执行的：</p>
+<p>第一步是用<code>git add</code>把文件添加进去，实际上就是把文件修改添加到暂存区；</p>
+<p>第二步是用<code>git commit</code>提交更改，实际上就是把暂存区的所有内容提交到当前分支。</p>
+<p>因为我们创建Git版本库时，Git自动为我们创建了唯一一个<code>master</code>分支，所以，现在，<code>git commit</code>就是往<code>master</code>分支上提交更改。</p>
+<p>你可以简单理解为，需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。</p>
+<p>tips：用<code>git status</code>查看一下状态</p>
+<h1 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h1><h1 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h1><p><code>git checkout -- file</code>可以丢弃工作区的修改：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git checkout -- readme.txt</span><br></pre></td></tr></table></figure>
+
+<p>命令<code>git checkout -- readme.txt</code>意思就是，把<code>readme.txt</code>文件在工作区的修改全部撤销，这里有两种情况：</p>
+<p>一种是<code>readme.txt</code>自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</p>
+<p>一种是<code>readme.txt</code>已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。</p>
+<p><strong>总之，就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态。</strong></p>
+<p>用命令<code>git reset HEAD &lt;file&gt;</code>可以把暂存区的修改撤销掉（unstage），重新放回工作区：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git reset HEAD readme.txt</span><br><span class="line">Unstaged changes after reset:</span><br><span class="line">M	readme.txt</span><br></pre></td></tr></table></figure>
+
+<p><code>git reset</code>命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用<code>HEAD</code>时，表示最新的版本。 </p>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><p>在Git中，删除也是一个修改操作，我们实战一下，先添加一个新文件<code>test.txt</code>到Git并且提交：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git add test.txt</span><br><span class="line"></span><br><span class="line">$ git commit -m <span class="string">&quot;add test.txt&quot;</span></span><br><span class="line">[master b84166e] add test.txt</span><br><span class="line"> <span class="number">1</span> file changed, <span class="number">1</span> insertion(+)</span><br><span class="line"> create mode <span class="number">100644</span> test.txt</span><br></pre></td></tr></table></figure>
+
+<p>一般情况下，你通常直接在文件管理器中把没用的文件删了，或者用<code>rm</code>命令删了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ rm test.txt</span><br></pre></td></tr></table></figure>
+
+<p>这个时候，Git知道你删除了文件，因此，工作区和版本库就不一致了，<code>git status</code>命令会立刻告诉你哪些文件被删除了：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">&quot;git add/rm &lt;file&gt;...&quot;</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">	deleted:    test.<span class="function">txt</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">no changes added to <span class="title">commit</span> <span class="params">(use <span class="string">&quot;git add&quot;</span> and/or <span class="string">&quot;git commit -a&quot;</span>)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>现在你有两个选择，一是确实要从版本库中删除该文件，那就用命令<code>git rm</code>删掉，并且<code>git commit</code>：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git rm test.txt</span><br><span class="line">rm <span class="string">&#x27;test.txt&#x27;</span></span><br><span class="line"></span><br><span class="line">$ git commit -m <span class="string">&quot;remove test.txt&quot;</span></span><br><span class="line">[master d46f35e] remove test.txt</span><br><span class="line"> <span class="number">1</span> file changed, <span class="number">1</span> deletion(-)</span><br><span class="line"> delete mode <span class="number">100644</span> test.txt</span><br></pre></td></tr></table></figure>
+
+<p>现在，文件就从版本库中被删除了。</p>
+<p>另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git checkout -- test.txt</span><br></pre></td></tr></table></figure>
+
+<p><code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
+]]></content>
+      <categories>
+        <category>Git</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>仓库</tag>
       </tags>
   </entry>
   <entry>
@@ -691,96 +781,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Git学习日记（一）安装与时光机</title>
-    <url>/2020/07/22/2020722-Git%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85%E4%B8%8E%E6%97%B6%E5%85%89%E6%9C%BA/</url>
-    <content><![CDATA[<font size = 3>
-
-<h1 id="windows下的安装"><a href="#windows下的安装" class="headerlink" title="windows下的安装"></a>windows下的安装</h1><p>下载安装</p>
-<p>安装完成后配置</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git config --global user.name <span class="string">&quot;Your Name&quot;</span></span><br><span class="line">$ git config --global user.email <span class="string">&quot;email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h1><p>版本库又名仓库，英文名<strong>repository</strong>，你可以简单理解成一个目录，这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。</p>
-<h2 id="创建目录"><a href="#创建目录" class="headerlink" title="创建目录"></a>创建目录</h2><p>首先，选择一个合适的地方，创建一个空目录：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ mkdir learngit<span class="comment">//创建目录</span></span><br><span class="line">$ cd learngit<span class="comment">//切换到刚刚创建的目录下</span></span><br><span class="line">$ pwd<span class="comment">//显示当前所在目录</span></span><br><span class="line">/Users/michael/learngit</span><br></pre></td></tr></table></figure>
-
-<h2 id="初始化仓库"><a href="#初始化仓库" class="headerlink" title="初始化仓库"></a>初始化仓库</h2><p>第二步，通过<code>git init</code>命令把这个目录变成Git可以管理的仓库：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git init</span><br><span class="line">Initialized empty Git repository in /Users/michael/learngit/.git/</span><br></pre></td></tr></table></figure>
-
-<p>目录下多了一个<code>.git</code>的目录，这个目录是Git来跟踪管理版本库的，没事千万不要手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。</p>
-<p>如果你没有看到<code>.git</code>目录，那是因为这个目录默认是隐藏的，用<code>ls -ah</code>命令就可以看见。</p>
-<h2 id="添加文件到版本库"><a href="#添加文件到版本库" class="headerlink" title="添加文件到版本库"></a>添加文件到版本库</h2><p>对于文件编码，如果没有历史遗留问题，强烈建议使用标准的<strong>UTF-8</strong>编码</p>
-<p>不要使用windows子代记事本，下载<a href="http://notepad-plus-plus.org/">Notepad++</a>代替记事本，不但功能强大，而且免费！记得把Notepad++的默认编码设置为UTF-8 without BOM即可。</p>
-<p>在任意位置创建一个txt（readme.txt），添加文本内容。</p>
-<p>第一步，用命令<code>git add</code>告诉Git，把文件添加到仓库：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git add readme.txt</span><br></pre></td></tr></table></figure>
-
-<p>第二步，用命令<code>git commit</code>告诉Git，把文件提交到仓库：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git commit -m <span class="string">&quot;wrote a readme file&quot;</span></span><br><span class="line">[master (root-commit) eaadf4e] wrote a readme file</span><br><span class="line"> <span class="number">1</span> file changed, <span class="number">2</span> insertions(+)</span><br><span class="line"> create mode <span class="number">100644</span> readme.txt</span><br></pre></td></tr></table></figure>
-
-<p><code>-m</code>后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p>
-<p>为什么Git添加文件需要<code>add</code>，<code>commit</code>一共两步呢？因为<code>commit</code>可以一次提交很多文件，所以你可以多次<code>add</code>不同的文件，比如：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git add file1.txt</span><br><span class="line">$ git add file2.txt file3.txt</span><br><span class="line">$ git commit -m <span class="string">&quot;add 3 files.&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="时光穿梭"><a href="#时光穿梭" class="headerlink" title="时光穿梭"></a>时光穿梭</h1><h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><p>在实际工作中，我们脑子里怎么可能记得一个几千行的文件每次都改了什么内容，不然要版本控制系统干什么。版本控制系统肯定有某个命令可以告诉我们历史记录，在Git中，我们用<code>git log</code>命令查看。</p>
-<p>要把当前版本<code>append GPL</code>回退到上一个版本<code>add distributed</code>，就可以使用<code>git reset</code>命令：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git reset --hard HEAD^</span><br><span class="line">HEAD is now at e475afc add distributed</span><br></pre></td></tr></table></figure>
-
-<p>指定回到未来的某个版本：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git reset --hard 1094a</span><br><span class="line">HEAD is now at 83b0afe append GPL</span><br></pre></td></tr></table></figure>
-
-<p>版本号没必要写全，前几位就可以了，Git会自动去找。当然也不能只写前一两位，因为Git可能会找到多个版本号，就无法确定是哪一个了。</p>
-<p>Git提供了一个命令<code>git reflog</code>用来记录你的每一次命令：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git reflog</span><br><span class="line">e475afc HEAD@&#123;<span class="number">1</span>&#125;: reset: moving to HEAD^</span><br><span class="line">1094adb (HEAD -&gt; master) HEAD@&#123;<span class="number">2</span>&#125;: commit: append GPL</span><br><span class="line">e475afc HEAD@&#123;<span class="number">3</span>&#125;: commit: add distributed</span><br><span class="line">eaadf4e HEAD@&#123;<span class="number">4</span>&#125;: commit (initial): wrote a readme file</span><br></pre></td></tr></table></figure>
-
-<h2 id="工作区和暂存区"><a href="#工作区和暂存区" class="headerlink" title="工作区和暂存区"></a>工作区和暂存区</h2><p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210416202617.png"></p>
-<p>我们把文件往Git版本库里添加的时候，是分两步执行的：</p>
-<p>第一步是用<code>git add</code>把文件添加进去，实际上就是把文件修改添加到暂存区；</p>
-<p>第二步是用<code>git commit</code>提交更改，实际上就是把暂存区的所有内容提交到当前分支。</p>
-<p>因为我们创建Git版本库时，Git自动为我们创建了唯一一个<code>master</code>分支，所以，现在，<code>git commit</code>就是往<code>master</code>分支上提交更改。</p>
-<p>你可以简单理解为，需要提交的文件修改通通放到暂存区，然后，一次性提交暂存区的所有修改。</p>
-<p>tips：用<code>git status</code>查看一下状态</p>
-<h1 id="管理修改"><a href="#管理修改" class="headerlink" title="管理修改"></a>管理修改</h1><h1 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h1><p><code>git checkout -- file</code>可以丢弃工作区的修改：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git checkout -- readme.txt</span><br></pre></td></tr></table></figure>
-
-<p>命令<code>git checkout -- readme.txt</code>意思就是，把<code>readme.txt</code>文件在工作区的修改全部撤销，这里有两种情况：</p>
-<p>一种是<code>readme.txt</code>自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</p>
-<p>一种是<code>readme.txt</code>已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。</p>
-<p><strong>总之，就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态。</strong></p>
-<p>用命令<code>git reset HEAD &lt;file&gt;</code>可以把暂存区的修改撤销掉（unstage），重新放回工作区：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git reset HEAD readme.txt</span><br><span class="line">Unstaged changes after reset:</span><br><span class="line">M	readme.txt</span><br></pre></td></tr></table></figure>
-
-<p><code>git reset</code>命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用<code>HEAD</code>时，表示最新的版本。 </p>
-<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><p>在Git中，删除也是一个修改操作，我们实战一下，先添加一个新文件<code>test.txt</code>到Git并且提交：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git add test.txt</span><br><span class="line"></span><br><span class="line">$ git commit -m <span class="string">&quot;add test.txt&quot;</span></span><br><span class="line">[master b84166e] add test.txt</span><br><span class="line"> <span class="number">1</span> file changed, <span class="number">1</span> insertion(+)</span><br><span class="line"> create mode <span class="number">100644</span> test.txt</span><br></pre></td></tr></table></figure>
-
-<p>一般情况下，你通常直接在文件管理器中把没用的文件删了，或者用<code>rm</code>命令删了：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ rm test.txt</span><br></pre></td></tr></table></figure>
-
-<p>这个时候，Git知道你删除了文件，因此，工作区和版本库就不一致了，<code>git status</code>命令会立刻告诉你哪些文件被删除了：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git status</span><br><span class="line">On branch master</span><br><span class="line">Changes not staged <span class="keyword">for</span> commit:</span><br><span class="line">  (use <span class="string">&quot;git add/rm &lt;file&gt;...&quot;</span> to update what will be committed)</span><br><span class="line">  (use <span class="string">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes in working directory)</span><br><span class="line"></span><br><span class="line">	deleted:    test.<span class="function">txt</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">no changes added to <span class="title">commit</span> <span class="params">(use <span class="string">&quot;git add&quot;</span> and/or <span class="string">&quot;git commit -a&quot;</span>)</span></span></span><br></pre></td></tr></table></figure>
-
-<p>现在你有两个选择，一是确实要从版本库中删除该文件，那就用命令<code>git rm</code>删掉，并且<code>git commit</code>：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git rm test.txt</span><br><span class="line">rm <span class="string">&#x27;test.txt&#x27;</span></span><br><span class="line"></span><br><span class="line">$ git commit -m <span class="string">&quot;remove test.txt&quot;</span></span><br><span class="line">[master d46f35e] remove test.txt</span><br><span class="line"> <span class="number">1</span> file changed, <span class="number">1</span> deletion(-)</span><br><span class="line"> delete mode <span class="number">100644</span> test.txt</span><br></pre></td></tr></table></figure>
-
-<p>现在，文件就从版本库中被删除了。</p>
-<p>另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">$ git checkout -- test.txt</span><br></pre></td></tr></table></figure>
-
-<p><code>git checkout</code>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
-]]></content>
-      <categories>
-        <category>Git</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>仓库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>牛客题解-NC62平衡二叉树</title>
     <url>/2020/07/03/202073-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC62%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
     <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一棵二叉树，判断该二叉树是否是平衡二叉树。</p>
@@ -849,39 +849,6 @@
       </tags>
   </entry>
   <entry>
-    <title>牛客题解-NC8二叉树路径之和</title>
-    <url>/2020/07/04/202074-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC8%E4%BA%8C%E5%8F%89%E6%A0%91%E8%B7%AF%E5%BE%84%E4%B9%8B%E5%92%8C/</url>
-    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个二叉树和一个值\ sum <em>s<strong>u</strong>m</em>，请找出所有的根节点到叶子节点的节点值之和等于\ sum <em>s<strong>u</strong>m</em> 的路径，<br>例如：<br>给出如下的二叉树，\ sum=22 <em>s<strong>u</strong>m</em>=22，</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210326221631.png"></p>
-<p>返回<br>[<br>[5,4,11,2],<br>[5,8,9]<br>]</p>
-<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,<span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[]</span><br></pre></td></tr></table></figure>
-
-<h2 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h2><p>输入：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,<span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[[<span class="number">1</span>,<span class="number">2</span>]]</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210326221753.png"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *   int val = 0;</span></span><br><span class="line"><span class="comment"> *   TreeNode left = null;</span></span><br><span class="line"><span class="comment"> *   TreeNode right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> root TreeNode类 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sum int整型 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型ArrayList&lt;ArrayList&lt;&gt;&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ArrayList&lt;ArrayList&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</span><br><span class="line">    ArrayList&lt;Integer&gt; tmp = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; pathSum (TreeNode root, <span class="keyword">int</span> sum) &#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        dfs(root, sum, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode root, <span class="keyword">int</span> sum, <span class="keyword">int</span> cur)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        tmp.add(root.val);</span><br><span class="line">        cur += root.val;</span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cur == sum)&#123;</span><br><span class="line">                res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(tmp));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                dfs(root.left, sum, cur);</span><br><span class="line">                dfs(root.right, sum, cur);</span><br><span class="line">            &#125;</span><br><span class="line">            tmp.remove(tmp.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>牛客题解</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>树</tag>
-        <tag>dfs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>牛客题解-NC134股票（无限次交易）</title>
     <url>/2020/07/04/202074-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC134%E8%82%A1%E7%A5%A8%EF%BC%88%E6%97%A0%E9%99%90%E6%AC%A1%E4%BA%A4%E6%98%93%EF%BC%89/</url>
     <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>假定你知道某只股票每一天价格的变动。</p>
@@ -936,6 +903,39 @@
       <tags>
         <tag>Java</tag>
         <tag>贪心</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>牛客题解-NC8二叉树路径之和</title>
+    <url>/2020/07/04/202074-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC8%E4%BA%8C%E5%8F%89%E6%A0%91%E8%B7%AF%E5%BE%84%E4%B9%8B%E5%92%8C/</url>
+    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个二叉树和一个值\ sum <em>s<strong>u</strong>m</em>，请找出所有的根节点到叶子节点的节点值之和等于\ sum <em>s<strong>u</strong>m</em> 的路径，<br>例如：<br>给出如下的二叉树，\ sum=22 <em>s<strong>u</strong>m</em>=22，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210326221631.png"></p>
+<p>返回<br>[<br>[5,4,11,2],<br>[5,8,9]<br>]</p>
+<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[]</span><br></pre></td></tr></table></figure>
+
+<h2 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h2><p>输入：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[[<span class="number">1</span>,<span class="number">2</span>]]</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210326221753.png"></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *   int val = 0;</span></span><br><span class="line"><span class="comment"> *   TreeNode left = null;</span></span><br><span class="line"><span class="comment"> *   TreeNode right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> root TreeNode类 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> sum int整型 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型ArrayList&lt;ArrayList&lt;&gt;&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ArrayList&lt;ArrayList&lt;Integer&gt;&gt; res = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</span><br><span class="line">    ArrayList&lt;Integer&gt; tmp = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; pathSum (TreeNode root, <span class="keyword">int</span> sum) &#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        dfs(root, sum, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode root, <span class="keyword">int</span> sum, <span class="keyword">int</span> cur)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        tmp.add(root.val);</span><br><span class="line">        cur += root.val;</span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="keyword">null</span> &amp;&amp; root.right == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cur == sum)&#123;</span><br><span class="line">                res.add(<span class="keyword">new</span> ArrayList&lt;&gt;(tmp));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                dfs(root.left, sum, cur);</span><br><span class="line">                dfs(root.right, sum, cur);</span><br><span class="line">            &#125;</span><br><span class="line">            tmp.remove(tmp.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>牛客题解</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>树</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -1074,6 +1074,64 @@
       </tags>
   </entry>
   <entry>
+    <title>请教我学数据结构（二）红黑树</title>
+    <url>/2020/08/14/2020814-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BA%A2%E9%BB%91%E6%A0%91/</url>
+    <content><![CDATA[<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><font size = 3>
+
+<p>红黑树是一种<strong>特殊的二叉查找树</strong>，能够通过操作实现<strong>自平衡</strong>。</p>
+<h1 id="定义和性质"><a href="#定义和性质" class="headerlink" title="定义和性质"></a>定义和性质</h1><p>（1）根节点和叶子节点都为黑色</p>
+<p>（2）红色节点的子节点都为黑色</p>
+<p>（3）任意一个节点到每一个叶子节点的路径所包含的黑色节点树相同。</p>
+<p>红黑树的自平衡通过三种操作实现：<strong>左旋</strong>、<strong>右旋</strong>和<strong>变色</strong></p>
+<p><strong>左旋</strong>：以某个结点作为支点(旋转结点)，其右子结点变为旋转结点的父结点，右子结点的左子结点变为旋转结点的右子结点，左子结点保持不变。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210412103419.png"></p>
+<p><strong>右旋</strong>：以某个结点作为支点(旋转结点)，其左子结点变为旋转结点的父结点，左子结点的右子结点变为旋转结点的左子结点，右子结点保持不变。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210412103440.png"></p>
+<p><strong>变色</strong>：结点的颜色由红变黑或由黑变红。</p>
+<h1 id="红黑树查找"><a href="#红黑树查找" class="headerlink" title="红黑树查找"></a>红黑树查找</h1><ol>
+<li><p>从根结点开始查找，把根结点设置为当前结点；</p>
+</li>
+<li><p>若当前结点为空，返回null；</p>
+</li>
+<li><p>若当前结点不为空，用当前结点的key跟查找key作比较；</p>
+</li>
+<li><p>若当前结点key等于查找key，那么该key就是查找目标，返回当前结点；</p>
+</li>
+<li><p>若当前结点key大于查找key，把当前结点的左子结点设置为当前结点，重复步骤2；</p>
+</li>
+<li><p>若当前结点key小于查找key，把当前结点的右子结点设置为当前结点，重复步骤2；</p>
+</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210412103534.png"></p>
+<h1 id="红黑树插入"><a href="#红黑树插入" class="headerlink" title="红黑树插入"></a>红黑树插入</h1><p>插入操作包括两部分工作：一查找插入的位置；二插入后自平衡。查找插入的父结点很简单，跟查找操作区别不大：</p>
+<ol>
+<li>从根结点开始查找；</li>
+<li>若根结点为空，那么插入结点作为根结点，结束。</li>
+<li>若根结点不为空，那么把根结点作为当前结点；</li>
+<li>若当前结点为null，返回当前结点的父结点，结束。</li>
+<li>若当前结点key等于查找key，那么该key所在结点就是插入结点，更新结点的值，结束。</li>
+<li>若当前结点key大于查找key，把当前结点的左子结点设置为当前结点，重复步骤4；</li>
+<li>若当前结点key小于查找key，把当前结点的右子结点设置为当前结点，重复步骤4；</li>
+</ol>
+<p>插入时包含以下情景</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210412103708.png"></p>
+<h1 id="红黑树删除"><a href="#红黑树删除" class="headerlink" title="红黑树删除"></a>红黑树删除</h1><p>红黑树的删除操作也包括两部分工作：一查找目标结点；而删除后自平衡。查找目标结点显然可以复用查找操作，当不存在目标结点时，忽略本次操作；当存在目标结点时，删除后就得做自平衡处理了。删除了结点后我们还需要找结点来替代删除结点的位置，不然子树跟父辈结点断开了，除非删除结点刚好没子结点，那么就不需要替代。</p>
+<p>二叉树删除结点找替代结点有3种情情景：</p>
+<ul>
+<li>情景1：若删除结点无子结点，直接删除</li>
+<li>情景2：若删除结点只有一个子结点，用子结点替换删除结点</li>
+<li>情景3：若删除结点有两个子结点，用后继结点（大于删除结点的最小结点）替换删除结点</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+      <tags>
+        <tag>红黑树</tag>
+        <tag>二叉查找树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>请教我学Java（二）ConcurrentHashMap为什么是线程安全的</title>
     <url>/2020/08/14/2020814-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6Java%EF%BC%88%E4%BA%8C%EF%BC%89ConcurrentHashMap%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84/</url>
     <content><![CDATA[<h1 id="HashMap线程不安全"><a href="#HashMap线程不安全" class="headerlink" title="HashMap线程不安全"></a>HashMap线程不安全</h1><font size = 3>
@@ -1189,64 +1247,6 @@
       </categories>
       <tags>
         <tag>排序</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>请教我学数据结构（二）红黑树</title>
-    <url>/2020/08/14/2020814-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BA%A2%E9%BB%91%E6%A0%91/</url>
-    <content><![CDATA[<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><font size = 3>
-
-<p>红黑树是一种<strong>特殊的二叉查找树</strong>，能够通过操作实现<strong>自平衡</strong>。</p>
-<h1 id="定义和性质"><a href="#定义和性质" class="headerlink" title="定义和性质"></a>定义和性质</h1><p>（1）根节点和叶子节点都为黑色</p>
-<p>（2）红色节点的子节点都为黑色</p>
-<p>（3）任意一个节点到每一个叶子节点的路径所包含的黑色节点树相同。</p>
-<p>红黑树的自平衡通过三种操作实现：<strong>左旋</strong>、<strong>右旋</strong>和<strong>变色</strong></p>
-<p><strong>左旋</strong>：以某个结点作为支点(旋转结点)，其右子结点变为旋转结点的父结点，右子结点的左子结点变为旋转结点的右子结点，左子结点保持不变。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210412103419.png"></p>
-<p><strong>右旋</strong>：以某个结点作为支点(旋转结点)，其左子结点变为旋转结点的父结点，左子结点的右子结点变为旋转结点的左子结点，右子结点保持不变。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210412103440.png"></p>
-<p><strong>变色</strong>：结点的颜色由红变黑或由黑变红。</p>
-<h1 id="红黑树查找"><a href="#红黑树查找" class="headerlink" title="红黑树查找"></a>红黑树查找</h1><ol>
-<li><p>从根结点开始查找，把根结点设置为当前结点；</p>
-</li>
-<li><p>若当前结点为空，返回null；</p>
-</li>
-<li><p>若当前结点不为空，用当前结点的key跟查找key作比较；</p>
-</li>
-<li><p>若当前结点key等于查找key，那么该key就是查找目标，返回当前结点；</p>
-</li>
-<li><p>若当前结点key大于查找key，把当前结点的左子结点设置为当前结点，重复步骤2；</p>
-</li>
-<li><p>若当前结点key小于查找key，把当前结点的右子结点设置为当前结点，重复步骤2；</p>
-</li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210412103534.png"></p>
-<h1 id="红黑树插入"><a href="#红黑树插入" class="headerlink" title="红黑树插入"></a>红黑树插入</h1><p>插入操作包括两部分工作：一查找插入的位置；二插入后自平衡。查找插入的父结点很简单，跟查找操作区别不大：</p>
-<ol>
-<li>从根结点开始查找；</li>
-<li>若根结点为空，那么插入结点作为根结点，结束。</li>
-<li>若根结点不为空，那么把根结点作为当前结点；</li>
-<li>若当前结点为null，返回当前结点的父结点，结束。</li>
-<li>若当前结点key等于查找key，那么该key所在结点就是插入结点，更新结点的值，结束。</li>
-<li>若当前结点key大于查找key，把当前结点的左子结点设置为当前结点，重复步骤4；</li>
-<li>若当前结点key小于查找key，把当前结点的右子结点设置为当前结点，重复步骤4；</li>
-</ol>
-<p>插入时包含以下情景</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210412103708.png"></p>
-<h1 id="红黑树删除"><a href="#红黑树删除" class="headerlink" title="红黑树删除"></a>红黑树删除</h1><p>红黑树的删除操作也包括两部分工作：一查找目标结点；而删除后自平衡。查找目标结点显然可以复用查找操作，当不存在目标结点时，忽略本次操作；当存在目标结点时，删除后就得做自平衡处理了。删除了结点后我们还需要找结点来替代删除结点的位置，不然子树跟父辈结点断开了，除非删除结点刚好没子结点，那么就不需要替代。</p>
-<p>二叉树删除结点找替代结点有3种情情景：</p>
-<ul>
-<li>情景1：若删除结点无子结点，直接删除</li>
-<li>情景2：若删除结点只有一个子结点，用子结点替换删除结点</li>
-<li>情景3：若删除结点有两个子结点，用后继结点（大于删除结点的最小结点）替换删除结点</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据结构</category>
-      </categories>
-      <tags>
-        <tag>红黑树</tag>
-        <tag>二叉查找树</tag>
       </tags>
   </entry>
   <entry>
@@ -1669,6 +1669,40 @@
       </tags>
   </entry>
   <entry>
+    <title>请教我学操作系统（二）IO多路复用技术</title>
+    <url>/2020/08/15/2020815-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%BA%8C%EF%BC%89IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF/</url>
+    <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><font size=3>
+
+<ol>
+<li><p>服务器端编程经常需要构造高性能的IO模型，常见的IO模型有四种：</p>
+<p>（1）同步阻塞IO（Blocking IO）：即传统的IO模型。</p>
+<p>（2）同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK。注意这里所说的NIO并非Java的NIO（New IO）库。</p>
+<p>（3）IO多路复用（IO Multiplexing）：即经典的Reactor设计模式，有时也称为异步阻塞IO，Java中的Selector和Linux中的epoll都是这种模型。</p>
+<p>（4）异步IO（Asynchronous IO）：即经典的Proactor设计模式，也称为异步非阻塞IO。</p>
+<p><strong>同步和异步</strong>的概念描述的是用户线程与内核的交互方式：同步是指<strong>用户线程发起IO请求后需要等待或者轮询内核IO操作完成后才能继续执行</strong>；而异步是指用户线程发起IO请求后仍继续执行，当内核IO操作完成后会通知用户线程，或者调用用户线程注册的回调函数。</p>
+<p><strong>阻塞和非阻塞</strong>的概念描述的是用户线程调用内核IO操作的方式：<strong>阻塞是指IO操作需要彻底完成后才返回到用户空间</strong>；而非阻塞是指IO操作被调用后立即返回给用户一个状态值，无需等到IO操作彻底完成。</p>
+</li>
+</ol>
+<h1 id="同步阻塞"><a href="#同步阻塞" class="headerlink" title="同步阻塞"></a>同步阻塞</h1><p>同步阻塞IO模型是最简单的IO模型，用户线程在内核进行IO操作时被阻塞。</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210404095213.png"></p>
+<h1 id="同步非阻塞IO"><a href="#同步非阻塞IO" class="headerlink" title="同步非阻塞IO"></a>同步非阻塞IO</h1><p>同步非阻塞IO是在同步阻塞IO的基础上，将socket设置为NONBLOCK。这样做用户线程可以在发起IO请求后可以立即返回。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210404095300.png"></p>
+<p>整个IO请求的过程中，虽然用户线程每次发起IO请求后可以立即返回，但是为了等到数据，仍需要<strong>不断地轮询、重复请求</strong>，消耗了大量的CPU的资源。一般很少直接使用这种模型，而是在其他IO模型中使用非阻塞IO这一特性。</p>
+<h1 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h1><p>流程上来看，使用select函数进行IO请求和同步阻塞模型没有太大的区别，甚至还多了添加监视socket，以及调用select函数的额外操作，效率更差。但是，使用select以后最大的优势是用户可以在一个线程内同时处理多个socket的IO请求。用户可以注册多个socket，然后不断地调用select读取被激活的socket，即可达到在同<strong>一个线程内同时处理多个IO请求的目的</strong>。而在同步阻塞模型中，必须通过多线程的方式才能达到这个目的。</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210404095402.png"></p>
+<p>通过Reactor的方式，可以将用户线程轮询IO操作状态的工作统一交给handle_events事件循环进行处理。用户线程注册事件处理器之后可以继续执行做其他的工作（异步），而<strong>Reactor线程负责调用内核的select函数检查socket状态</strong>。当有socket被激活时，则通知相应的用户线程（或执行用户线程的回调函数），执行handle_event进行数据读取、处理的工作。由于select函数是阻塞的，因此多路IO复用模型也被称为异步阻塞IO模型。注意，这里的所说的阻塞是指select函数执行时线程被阻塞，而不是指socket。一般在使用IO多路复用模型时，socket都是设置为NONBLOCK的，不过这并不会产生影响，因为用户发起IO请求时，数据已经到达了，用户线程一定不会被阻塞。</p>
+<h1 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h1><p>“真正”的异步IO需要操作系统更强的支持。在IO多路复用模型中，事件循环将文件句柄的状态事件通知给用户线程，由用户线程自行读取数据、处理数据。而在异步IO模型中，当用户线程收到通知时，数据已经被内核读取完毕，并放在了用户线程指定的缓冲区内，内核在IO完成后通知用户线程直接使用即可。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210404095443.png"></p>
+]]></content>
+      <categories>
+        <category>操作系统</category>
+      </categories>
+      <tags>
+        <tag>线程</tag>
+        <tag>IO</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>请教我学设计模式（一）单例模式的常用实现方法</title>
     <url>/2020/08/15/2020815-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%80%EF%BC%89%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%B8%B8%E7%94%A8%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<h1 id="单例模式是什么？"><a href="#单例模式是什么？" class="headerlink" title="单例模式是什么？"></a>单例模式是什么？</h1><font size = 3>
@@ -1712,40 +1746,6 @@
       <tags>
         <tag>JAVA</tag>
         <tag>单例</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>请教我学操作系统（二）IO多路复用技术</title>
-    <url>/2020/08/15/2020815-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%88%E4%BA%8C%EF%BC%89IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF/</url>
-    <content><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><font size=3>
-
-<ol>
-<li><p>服务器端编程经常需要构造高性能的IO模型，常见的IO模型有四种：</p>
-<p>（1）同步阻塞IO（Blocking IO）：即传统的IO模型。</p>
-<p>（2）同步非阻塞IO（Non-blocking IO）：默认创建的socket都是阻塞的，非阻塞IO要求socket被设置为NONBLOCK。注意这里所说的NIO并非Java的NIO（New IO）库。</p>
-<p>（3）IO多路复用（IO Multiplexing）：即经典的Reactor设计模式，有时也称为异步阻塞IO，Java中的Selector和Linux中的epoll都是这种模型。</p>
-<p>（4）异步IO（Asynchronous IO）：即经典的Proactor设计模式，也称为异步非阻塞IO。</p>
-<p><strong>同步和异步</strong>的概念描述的是用户线程与内核的交互方式：同步是指<strong>用户线程发起IO请求后需要等待或者轮询内核IO操作完成后才能继续执行</strong>；而异步是指用户线程发起IO请求后仍继续执行，当内核IO操作完成后会通知用户线程，或者调用用户线程注册的回调函数。</p>
-<p><strong>阻塞和非阻塞</strong>的概念描述的是用户线程调用内核IO操作的方式：<strong>阻塞是指IO操作需要彻底完成后才返回到用户空间</strong>；而非阻塞是指IO操作被调用后立即返回给用户一个状态值，无需等到IO操作彻底完成。</p>
-</li>
-</ol>
-<h1 id="同步阻塞"><a href="#同步阻塞" class="headerlink" title="同步阻塞"></a>同步阻塞</h1><p>同步阻塞IO模型是最简单的IO模型，用户线程在内核进行IO操作时被阻塞。</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210404095213.png"></p>
-<h1 id="同步非阻塞IO"><a href="#同步非阻塞IO" class="headerlink" title="同步非阻塞IO"></a>同步非阻塞IO</h1><p>同步非阻塞IO是在同步阻塞IO的基础上，将socket设置为NONBLOCK。这样做用户线程可以在发起IO请求后可以立即返回。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210404095300.png"></p>
-<p>整个IO请求的过程中，虽然用户线程每次发起IO请求后可以立即返回，但是为了等到数据，仍需要<strong>不断地轮询、重复请求</strong>，消耗了大量的CPU的资源。一般很少直接使用这种模型，而是在其他IO模型中使用非阻塞IO这一特性。</p>
-<h1 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h1><p>流程上来看，使用select函数进行IO请求和同步阻塞模型没有太大的区别，甚至还多了添加监视socket，以及调用select函数的额外操作，效率更差。但是，使用select以后最大的优势是用户可以在一个线程内同时处理多个socket的IO请求。用户可以注册多个socket，然后不断地调用select读取被激活的socket，即可达到在同<strong>一个线程内同时处理多个IO请求的目的</strong>。而在同步阻塞模型中，必须通过多线程的方式才能达到这个目的。</p>
-<p> <img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210404095402.png"></p>
-<p>通过Reactor的方式，可以将用户线程轮询IO操作状态的工作统一交给handle_events事件循环进行处理。用户线程注册事件处理器之后可以继续执行做其他的工作（异步），而<strong>Reactor线程负责调用内核的select函数检查socket状态</strong>。当有socket被激活时，则通知相应的用户线程（或执行用户线程的回调函数），执行handle_event进行数据读取、处理的工作。由于select函数是阻塞的，因此多路IO复用模型也被称为异步阻塞IO模型。注意，这里的所说的阻塞是指select函数执行时线程被阻塞，而不是指socket。一般在使用IO多路复用模型时，socket都是设置为NONBLOCK的，不过这并不会产生影响，因为用户发起IO请求时，数据已经到达了，用户线程一定不会被阻塞。</p>
-<h1 id="异步IO"><a href="#异步IO" class="headerlink" title="异步IO"></a>异步IO</h1><p>“真正”的异步IO需要操作系统更强的支持。在IO多路复用模型中，事件循环将文件句柄的状态事件通知给用户线程，由用户线程自行读取数据、处理数据。而在异步IO模型中，当用户线程收到通知时，数据已经被内核读取完毕，并放在了用户线程指定的缓冲区内，内核在IO完成后通知用户线程直接使用即可。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210404095443.png"></p>
-]]></content>
-      <categories>
-        <category>操作系统</category>
-      </categories>
-      <tags>
-        <tag>线程</tag>
-        <tag>IO</tag>
       </tags>
   </entry>
   <entry>
@@ -1804,54 +1804,6 @@
       <tags>
         <tag>Spring</tag>
         <tag>MVC</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>网易云歌单导入AppleMusic</title>
-    <url>/2020/06/23/%E7%BD%91%E6%98%93%E4%BA%91%E6%AD%8C%E5%8D%95%E5%AF%BC%E5%85%A5AppleMusic/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Apple Music作为ios内的一款音乐APP，学生认证后五元一月的价格实属良心，当然比起国内大量的音乐软件，收录的华人音乐内容偏少，优质的段子手评论也很少。但是优势却也很明显，普通音质的音乐比起其他软件的无损音乐要更加高（简直是无损中的无损啊）。所以如果你追求极致的音质体验，又偏爱欧美音乐时，Apple Music确实是性价比最高的选择了。</p>
-<p>但是，在小编从网易云音乐转用Apple Music时却发现这是一件极其痛苦的事情，一方面沉醉于Apple Music使用的简洁风格的流畅用户体验以及夸张的音质。一方面又难以割舍网易云音乐中一颗一颗小红星攒出来只属于我自己的歌单（泪奔）。难道我要从网易云的歌单中一首接一首的去Apple Music中搜索id然后添加到音乐库中去吗，看着我那500+音乐的歌单陷入了沉思….</p>
-<p>事实上，我们可以利用ios上默认安装的一款app，快捷指令（原捷径）一键导入歌单。具体步骤如下：</p>
-<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="1-下载“网易云→Apple-Music”快捷指令"><a href="#1-下载“网易云→Apple-Music”快捷指令" class="headerlink" title="1. 下载“网易云→Apple Music”快捷指令"></a>1. 下载“网易云→Apple Music”快捷指令</h2><p>关注公众号：“程序员评测室”后台回复“导入歌单”可以获取下载链接（由于要调用到快捷指令，请在safari中打开该链接）</p>
-
-
-
-
-<p>点击上图下方获取捷径。</p>
-
-
-
-
-<p>出现上图所示内容，下拉到底部。</p>
-
-
-
-
-<p>点击添加不受信任的快捷指令（注意：该快捷指令并无恶意内容，由于是非苹果官方捷径库的第三方捷径，所以会有该提示，请放心使用），到这里我们就成功将该捷径添加进了捷径中心。</p>
-<h2 id="2-复制网易云歌单中的歌单链接"><a href="#2-复制网易云歌单中的歌单链接" class="headerlink" title="2. 复制网易云歌单中的歌单链接"></a>2. 复制网易云歌单中的歌单链接</h2><p> 具体操作：首先点开你想复制的歌单，然后点击分享，最后点击复制链接。</p>
-
-
-
-
-<h2 id="3-利用捷径开始复制这个歌单吧！"><a href="#3-利用捷径开始复制这个歌单吧！" class="headerlink" title="3. 利用捷径开始复制这个歌单吧！"></a>3. 利用捷径开始复制这个歌单吧！</h2><p>退出网易云，进入捷径中心，点击我们在步骤一中成功添加的捷径并授予系统提示的相关权限。接下来在一段时间的等待过后就可以在Apple Music中看到我们成功复制的歌单啦！（注意，等待时间的长短取决于你歌单中音乐数量的多少，我亲测复制300+音乐用时半小时），在等待过程中不要把捷径中心挂在后台，会出现提前结束捷径的情况。</p>
-
-
-
-
-<p>下面就是我自己成功复制的歌单啦！</p>
-
-
-
-
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>好啦，到这里就结束啦，快去将你心爱的网易云歌单导入Apple Music吧！</p>
-]]></content>
-      <categories>
-        <category>小技巧</category>
-      </categories>
-      <tags>
-        <tag>手机</tag>
-        <tag>ios</tag>
-        <tag>音乐</tag>
       </tags>
   </entry>
   <entry>
@@ -1923,6 +1875,54 @@
       <tags>
         <tag>Java</tag>
         <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网易云歌单导入AppleMusic</title>
+    <url>/2020/06/23/%E7%BD%91%E6%98%93%E4%BA%91%E6%AD%8C%E5%8D%95%E5%AF%BC%E5%85%A5AppleMusic/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Apple Music作为ios内的一款音乐APP，学生认证后五元一月的价格实属良心，当然比起国内大量的音乐软件，收录的华人音乐内容偏少，优质的段子手评论也很少。但是优势却也很明显，普通音质的音乐比起其他软件的无损音乐要更加高（简直是无损中的无损啊）。所以如果你追求极致的音质体验，又偏爱欧美音乐时，Apple Music确实是性价比最高的选择了。</p>
+<p>但是，在小编从网易云音乐转用Apple Music时却发现这是一件极其痛苦的事情，一方面沉醉于Apple Music使用的简洁风格的流畅用户体验以及夸张的音质。一方面又难以割舍网易云音乐中一颗一颗小红星攒出来只属于我自己的歌单（泪奔）。难道我要从网易云的歌单中一首接一首的去Apple Music中搜索id然后添加到音乐库中去吗，看着我那500+音乐的歌单陷入了沉思….</p>
+<p>事实上，我们可以利用ios上默认安装的一款app，快捷指令（原捷径）一键导入歌单。具体步骤如下：</p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><h2 id="1-下载“网易云→Apple-Music”快捷指令"><a href="#1-下载“网易云→Apple-Music”快捷指令" class="headerlink" title="1. 下载“网易云→Apple Music”快捷指令"></a>1. 下载“网易云→Apple Music”快捷指令</h2><p>关注公众号：“程序员评测室”后台回复“导入歌单”可以获取下载链接（由于要调用到快捷指令，请在safari中打开该链接）</p>
+
+
+
+
+<p>点击上图下方获取捷径。</p>
+
+
+
+
+<p>出现上图所示内容，下拉到底部。</p>
+
+
+
+
+<p>点击添加不受信任的快捷指令（注意：该快捷指令并无恶意内容，由于是非苹果官方捷径库的第三方捷径，所以会有该提示，请放心使用），到这里我们就成功将该捷径添加进了捷径中心。</p>
+<h2 id="2-复制网易云歌单中的歌单链接"><a href="#2-复制网易云歌单中的歌单链接" class="headerlink" title="2. 复制网易云歌单中的歌单链接"></a>2. 复制网易云歌单中的歌单链接</h2><p> 具体操作：首先点开你想复制的歌单，然后点击分享，最后点击复制链接。</p>
+
+
+
+
+<h2 id="3-利用捷径开始复制这个歌单吧！"><a href="#3-利用捷径开始复制这个歌单吧！" class="headerlink" title="3. 利用捷径开始复制这个歌单吧！"></a>3. 利用捷径开始复制这个歌单吧！</h2><p>退出网易云，进入捷径中心，点击我们在步骤一中成功添加的捷径并授予系统提示的相关权限。接下来在一段时间的等待过后就可以在Apple Music中看到我们成功复制的歌单啦！（注意，等待时间的长短取决于你歌单中音乐数量的多少，我亲测复制300+音乐用时半小时），在等待过程中不要把捷径中心挂在后台，会出现提前结束捷径的情况。</p>
+
+
+
+
+<p>下面就是我自己成功复制的歌单啦！</p>
+
+
+
+
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>好啦，到这里就结束啦，快去将你心爱的网易云歌单导入Apple Music吧！</p>
+]]></content>
+      <categories>
+        <category>小技巧</category>
+      </categories>
+      <tags>
+        <tag>手机</tag>
+        <tag>ios</tag>
+        <tag>音乐</tag>
       </tags>
   </entry>
 </search>
