@@ -171,6 +171,23 @@
       </tags>
   </entry>
   <entry>
+    <title>牛客题解-NC66两个链表的第一个公共节点</title>
+    <url>/2020/06/25/2020625-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC66%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/</url>
+    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）</p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>从两个链表的头节点出发，同时向后移动，当某一个链表的指针为空后，此时到了链表尾，指向另一个链表的头节点，这样，最终两个指针会在两个链表的同一相对位置。此时继续遍历就能找到第一个公共节点。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210325194213.png"></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">public class ListNode &#123;</span></span><br><span class="line"><span class="comment">    int val;</span></span><br><span class="line"><span class="comment">    ListNode next = null;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    ListNode(int val) &#123;</span></span><br><span class="line"><span class="comment">        this.val = val;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">FindFirstCommonNode</span><span class="params">(ListNode pHead1, ListNode pHead2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pHead1==<span class="keyword">null</span> || pHead2==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        ListNode l1 = pHead1;</span><br><span class="line">        ListNode l2 = pHead2;</span><br><span class="line">        <span class="keyword">while</span>(l1 != l2)&#123;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">            <span class="keyword">if</span>(l1 != l2)&#123;</span><br><span class="line">                <span class="keyword">if</span>(l1 == <span class="keyword">null</span>) l1 = pHead2;</span><br><span class="line">                <span class="keyword">if</span>(l2 == <span class="keyword">null</span>) l2 = pHead1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>牛客题解</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>牛客题解-NC90设计getMin功能的栈</title>
     <url>/2020/06/26/2020626-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC90%E8%AE%BE%E8%AE%A1getMin%E5%8A%9F%E8%83%BD%E7%9A%84%E6%A0%88/</url>
     <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>实现一个特殊功能的栈，在实现栈的基本功能的基础上，再实现返回栈中最小元素的操作。</p>
@@ -196,23 +213,6 @@
       <tags>
         <tag>Java</tag>
         <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>牛客题解-NC66两个链表的第一个公共节点</title>
-    <url>/2020/06/25/2020625-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC66%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/</url>
-    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入两个链表，找出它们的第一个公共结点。（注意因为传入数据是链表，所以错误测试数据的提示是用其他方式显示的，保证传入数据是正确的）</p>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>从两个链表的头节点出发，同时向后移动，当某一个链表的指针为空后，此时到了链表尾，指向另一个链表的头节点，这样，最终两个指针会在两个链表的同一相对位置。此时继续遍历就能找到第一个公共节点。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210325194213.png"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">public class ListNode &#123;</span></span><br><span class="line"><span class="comment">    int val;</span></span><br><span class="line"><span class="comment">    ListNode next = null;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    ListNode(int val) &#123;</span></span><br><span class="line"><span class="comment">        this.val = val;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">FindFirstCommonNode</span><span class="params">(ListNode pHead1, ListNode pHead2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pHead1==<span class="keyword">null</span> || pHead2==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        ListNode l1 = pHead1;</span><br><span class="line">        ListNode l2 = pHead2;</span><br><span class="line">        <span class="keyword">while</span>(l1 != l2)&#123;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">            <span class="keyword">if</span>(l1 != l2)&#123;</span><br><span class="line">                <span class="keyword">if</span>(l1 == <span class="keyword">null</span>) l1 = pHead2;</span><br><span class="line">                <span class="keyword">if</span>(l2 == <span class="keyword">null</span>) l2 = pHead1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>牛客题解</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -243,30 +243,6 @@
         <tag>Java</tag>
         <tag>字符串</tag>
         <tag>模拟</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>牛客题解-NC17最长回文子串</title>
-    <url>/2020/06/28/2020628-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC17%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</url>
-    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>对于一个字符串，请设计一个高效算法，计算其中最长回文子串的长度。</p>
-<p>给定字符串<strong>A</strong>以及它的长度<strong>n</strong>，请返回最长回文子串的长度。</p>
-<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;abc1234321ab&quot;</span>,<span class="number">12</span></span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210327210613.png"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLongestPalindrome</span><span class="params">(String A, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[n][n];</span><br><span class="line">        String ans = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; n; l++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i + l &lt; n; ++i)&#123;</span><br><span class="line">                <span class="keyword">int</span> j = i + l;</span><br><span class="line">                <span class="keyword">if</span>(l == <span class="number">0</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(l == <span class="number">1</span>)&#123;</span><br><span class="line">                    dp[i][j] = (A.charAt(i) == A.charAt(j));</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = (dp[i+<span class="number">1</span>][j-<span class="number">1</span>] &amp;&amp; A.charAt(i) == A.charAt(j));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &amp;&amp; l + <span class="number">1</span> &gt; ans.length())&#123;</span><br><span class="line">                    ans = A.substring(i,i+l+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans.length();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>牛客题解</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>动态规划</tag>
-        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
@@ -305,6 +281,30 @@
         <tag>Java</tag>
         <tag>树</tag>
         <tag>bfs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>牛客题解-NC17最长回文子串</title>
+    <url>/2020/06/28/2020628-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC17%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</url>
+    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>对于一个字符串，请设计一个高效算法，计算其中最长回文子串的长度。</p>
+<p>给定字符串<strong>A</strong>以及它的长度<strong>n</strong>，请返回最长回文子串的长度。</p>
+<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;abc1234321ab&quot;</span>,<span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210327210613.png"></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLongestPalindrome</span><span class="params">(String A, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[n][n];</span><br><span class="line">        String ans = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; n; l++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i + l &lt; n; ++i)&#123;</span><br><span class="line">                <span class="keyword">int</span> j = i + l;</span><br><span class="line">                <span class="keyword">if</span>(l == <span class="number">0</span>)&#123;</span><br><span class="line">                    dp[i][j] = <span class="keyword">true</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(l == <span class="number">1</span>)&#123;</span><br><span class="line">                    dp[i][j] = (A.charAt(i) == A.charAt(j));</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    dp[i][j] = (dp[i+<span class="number">1</span>][j-<span class="number">1</span>] &amp;&amp; A.charAt(i) == A.charAt(j));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &amp;&amp; l + <span class="number">1</span> &gt; ans.length())&#123;</span><br><span class="line">                    ans = A.substring(i,i+l+<span class="number">1</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans.length();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>牛客题解</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>动态规划</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
@@ -454,34 +454,6 @@
       </tags>
   </entry>
   <entry>
-    <title>牛客题解-NC69链表中倒数第k个节点</title>
-    <url>/2020/07/01/202071-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC69%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/</url>
-    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一个链表，输出该链表中倒数第k个结点。</p>
-<p>如果该链表长度小于k，请返回空。</p>
-<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,<span class="number">1</span> </span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="number">5</span>&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>首先让一个指针first先走k步。</p>
-<p>此时再引出一个res指针从head节点开始。</p>
-<p>first 和res 指针同时前进。</p>
-<p>当first走到尾部时，此时res为倒数第k个节点。</p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *   int val;</span></span><br><span class="line"><span class="comment"> *   ListNode next = null;</span></span><br><span class="line"><span class="comment"> *   public ListNode(int val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *   &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pHead ListNode类 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> k int整型 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> ListNode类</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">FindKthToTail</span> <span class="params">(ListNode pHead, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        ListNode first = pHead;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;k; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(first==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            first = first.next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode res = pHead;</span><br><span class="line">        <span class="keyword">while</span>(first != <span class="keyword">null</span>)&#123;</span><br><span class="line">            res = res.next;</span><br><span class="line">            first = first.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>牛客题解</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>链表</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Git学习日记（一）安装与时光机</title>
     <url>/2020/07/22/2020722-Git%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%E5%AE%89%E8%A3%85%E4%B8%8E%E6%97%B6%E5%85%89%E6%9C%BA/</url>
     <content><![CDATA[<font size = 3>
@@ -569,6 +541,66 @@
       <tags>
         <tag>Git</tag>
         <tag>仓库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>牛客题解-NC69链表中倒数第k个节点</title>
+    <url>/2020/07/01/202071-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC69%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/</url>
+    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一个链表，输出该链表中倒数第k个结点。</p>
+<p>如果该链表长度小于k，请返回空。</p>
+<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;,<span class="number">1</span> </span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="number">5</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>首先让一个指针first先走k步。</p>
+<p>此时再引出一个res指针从head节点开始。</p>
+<p>first 和res 指针同时前进。</p>
+<p>当first走到尾部时，此时res为倒数第k个节点。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *   int val;</span></span><br><span class="line"><span class="comment"> *   ListNode next = null;</span></span><br><span class="line"><span class="comment"> *   public ListNode(int val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *   &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pHead ListNode类 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> k int整型 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> ListNode类</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">FindKthToTail</span> <span class="params">(ListNode pHead, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        ListNode first = pHead;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;k; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(first==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            first = first.next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode res = pHead;</span><br><span class="line">        <span class="keyword">while</span>(first != <span class="keyword">null</span>)&#123;</span><br><span class="line">            res = res.next;</span><br><span class="line">            first = first.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>牛客题解</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>牛客题解-NC135股票（两次交易）</title>
+    <url>/2020/07/03/202073-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC135%E8%82%A1%E7%A5%A8%EF%BC%88%E4%B8%A4%E6%AC%A1%E4%BA%A4%E6%98%93%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>假定你知道某只股票每一天价格的变动。</p>
+<p>你最多可以同时持有一只股票。但你最多只能进行<strong>两次</strong>交易（一次买进和一次卖出记为一次交易。买进和卖出均无手续费）。</p>
+<p>请设计一个函数，计算你所能获得的最大收益。</p>
+<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[<span class="number">8</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>tips：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">第三天买进，第四天卖出，第五天买进，第六天卖出。总收益为<span class="number">4</span>。 </span><br><span class="line">总天数不大于<span class="number">200000</span>。保证股票每一天的价格在[<span class="number">1</span>,<span class="number">100</span>]范围内。</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>该问题为动态规划问题，关键在于找到初始值以及动态规划转移方程。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210326215805.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210326215841.png"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210326215918814.png" alt="image-20210326215918814"></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可</span></span><br><span class="line"><span class="comment">     * 两次交易所能获得的最大收益</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> prices int整型一维数组 股票每一天的价格</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span> <span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        <span class="keyword">if</span>(prices.length == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[prices.length][<span class="number">5</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = -<span class="number">1</span> * prices[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">3</span>] = -<span class="number">1</span> * prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i&lt;prices.length; i++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = dp[i-<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">            dp[i][<span class="number">1</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">1</span>], dp[i-<span class="number">1</span>][<span class="number">0</span>] - prices[i]);</span><br><span class="line">            dp[i][<span class="number">2</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">2</span>], dp[i-<span class="number">1</span>][<span class="number">1</span>] + prices[i]);</span><br><span class="line">            dp[i][<span class="number">3</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">3</span>], dp[i-<span class="number">1</span>][<span class="number">2</span>] - prices[i]);</span><br><span class="line">            dp[i][<span class="number">4</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">4</span>], dp[i-<span class="number">1</span>][<span class="number">3</span>] + prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[prices.length-<span class="number">1</span>][<span class="number">4</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>牛客题解</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -749,65 +781,6 @@
       </tags>
   </entry>
   <entry>
-    <title>牛客题解-NC135股票（两次交易）</title>
-    <url>/2020/07/03/202073-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC135%E8%82%A1%E7%A5%A8%EF%BC%88%E4%B8%A4%E6%AC%A1%E4%BA%A4%E6%98%93%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>假定你知道某只股票每一天价格的变动。</p>
-<p>你最多可以同时持有一只股票。但你最多只能进行<strong>两次</strong>交易（一次买进和一次卖出记为一次交易。买进和卖出均无手续费）。</p>
-<p>请设计一个函数，计算你所能获得的最大收益。</p>
-<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">[<span class="number">8</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-<p>tips：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">第三天买进，第四天卖出，第五天买进，第六天卖出。总收益为<span class="number">4</span>。 </span><br><span class="line">总天数不大于<span class="number">200000</span>。保证股票每一天的价格在[<span class="number">1</span>,<span class="number">100</span>]范围内。</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>该问题为动态规划问题，关键在于找到初始值以及动态规划转移方程。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210326215805.png"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210326215841.png"></p>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210326215918814.png" alt="image-20210326215918814"></p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可</span></span><br><span class="line"><span class="comment">     * 两次交易所能获得的最大收益</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> prices int整型一维数组 股票每一天的价格</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span> <span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        <span class="keyword">if</span>(prices.length == <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[prices.length][<span class="number">5</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = -<span class="number">1</span> * prices[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">3</span>] = -<span class="number">1</span> * prices[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i&lt;prices.length; i++)&#123;</span><br><span class="line">            dp[i][<span class="number">0</span>] = dp[i-<span class="number">1</span>][<span class="number">0</span>];</span><br><span class="line">            dp[i][<span class="number">1</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">1</span>], dp[i-<span class="number">1</span>][<span class="number">0</span>] - prices[i]);</span><br><span class="line">            dp[i][<span class="number">2</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">2</span>], dp[i-<span class="number">1</span>][<span class="number">1</span>] + prices[i]);</span><br><span class="line">            dp[i][<span class="number">3</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">3</span>], dp[i-<span class="number">1</span>][<span class="number">2</span>] - prices[i]);</span><br><span class="line">            dp[i][<span class="number">4</span>] = Math.max(dp[i-<span class="number">1</span>][<span class="number">4</span>], dp[i-<span class="number">1</span>][<span class="number">3</span>] + prices[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[prices.length-<span class="number">1</span>][<span class="number">4</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>牛客题解</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>牛客题解-NC62平衡二叉树</title>
-    <url>/2020/07/03/202073-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC62%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
-    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一棵二叉树，判断该二叉树是否是平衡二叉树。</p>
-<p>在这里，我们只需要考虑其平衡性，不需要考虑其是不是排序二叉树</p>
-<p><strong>平衡二叉树</strong>（Balanced Binary Tree），具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</p>
-<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>利用递归逐层判断左右子树深度只差是否超过1。</p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left = depth(root.left);</span><br><span class="line">        <span class="keyword">if</span>(left == -<span class="number">1</span>)<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = depth(root.right);</span><br><span class="line">        <span class="keyword">if</span>(right == -<span class="number">1</span>)<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(left - right &lt; (-<span class="number">1</span>) || left - right &gt; <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span> + (left &gt; right ? left:right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">IsBalanced_Solution</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> depth(root) != -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>牛客题解</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>树</tag>
-        <tag>dfs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>牛客题解-NC92最长公共子序列</title>
     <url>/2020/07/03/202073-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC92%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97/</url>
     <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定两个字符串str1和str2，输出连个字符串的最长公共子序列。如过最长公共子序列为空，则输出-1。</p>
@@ -846,6 +819,33 @@
       <tags>
         <tag>Java</tag>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>牛客题解-NC62平衡二叉树</title>
+    <url>/2020/07/03/202073-%E7%89%9B%E5%AE%A2%E9%A2%98%E8%A7%A3-NC62%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    <content><![CDATA[<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>输入一棵二叉树，判断该二叉树是否是平衡二叉树。</p>
+<p>在这里，我们只需要考虑其平衡性，不需要考虑其是不是排序二叉树</p>
+<p><strong>平衡二叉树</strong>（Balanced Binary Tree），具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。</p>
+<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><p>输入：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>利用递归逐层判断左右子树深度只差是否超过1。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">depth</span><span class="params">(TreeNode root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> left = depth(root.left);</span><br><span class="line">        <span class="keyword">if</span>(left == -<span class="number">1</span>)<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> right = depth(root.right);</span><br><span class="line">        <span class="keyword">if</span>(right == -<span class="number">1</span>)<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(left - right &lt; (-<span class="number">1</span>) || left - right &gt; <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span> + (left &gt; right ? left:right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">IsBalanced_Solution</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> depth(root) != -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>牛客题解</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>树</tag>
+        <tag>dfs</tag>
       </tags>
   </entry>
   <entry>
@@ -1074,6 +1074,28 @@
       </tags>
   </entry>
   <entry>
+    <title>请教我学Java（二）ConcurrentHashMap为什么是线程安全的</title>
+    <url>/2020/08/14/2020814-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6Java%EF%BC%88%E4%BA%8C%EF%BC%89ConcurrentHashMap%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84/</url>
+    <content><![CDATA[<h1 id="HashMap线程不安全"><a href="#HashMap线程不安全" class="headerlink" title="HashMap线程不安全"></a>HashMap线程不安全</h1><font size = 3>
+
+<p>HashMap在扩容的时候会调用resize（）方法，这样的并发操作容易在一个桶上形成环形链表。当获取一个不存在的key时，计算出的index正好时环形链表的下标时就会出现如下的死循环。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210416191153.png"></p>
+<h1 id="ConcurrentHashMap线程安全"><a href="#ConcurrentHashMap线程安全" class="headerlink" title="ConcurrentHashMap线程安全"></a>ConcurrentHashMap线程安全</h1><p>引入了如下的Segment数组</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210416191307.png"></p>
+<p>其中的核心数据，例如value和链表都是由volatile修饰的，保证了数据的可见性。</p>
+<p>原理上来说：ConcurrentHashMap 采用了分段锁技术，其中 Segment 继承于 ReentrantLock。不会像 HashTable 那样不管是 put 还是 get 操作都需要做同步处理，理论上 ConcurrentHashMap 支持 CurrencyLevel (Segment 数组数量)的线程并发。每当一个线程占用锁访问一个 Segment 时，不会影响到其他的 Segment。</p>
+<p>jdk1.8抛弃了原有的segment锁，而使用CAS(Compare ans Swap) + synchronized的方式实现。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210416191607.png"></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>HashMap</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>请教我学数据结构（二）红黑树</title>
     <url>/2020/08/14/2020814-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BA%A2%E9%BB%91%E6%A0%91/</url>
     <content><![CDATA[<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><font size = 3>
@@ -1129,28 +1151,6 @@
       <tags>
         <tag>红黑树</tag>
         <tag>二叉查找树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>请教我学Java（二）ConcurrentHashMap为什么是线程安全的</title>
-    <url>/2020/08/14/2020814-%E8%AF%B7%E6%95%99%E6%88%91%E5%AD%A6Java%EF%BC%88%E4%BA%8C%EF%BC%89ConcurrentHashMap%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84/</url>
-    <content><![CDATA[<h1 id="HashMap线程不安全"><a href="#HashMap线程不安全" class="headerlink" title="HashMap线程不安全"></a>HashMap线程不安全</h1><font size = 3>
-
-<p>HashMap在扩容的时候会调用resize（）方法，这样的并发操作容易在一个桶上形成环形链表。当获取一个不存在的key时，计算出的index正好时环形链表的下标时就会出现如下的死循环。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210416191153.png"></p>
-<h1 id="ConcurrentHashMap线程安全"><a href="#ConcurrentHashMap线程安全" class="headerlink" title="ConcurrentHashMap线程安全"></a>ConcurrentHashMap线程安全</h1><p>引入了如下的Segment数组</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210416191307.png"></p>
-<p>其中的核心数据，例如value和链表都是由volatile修饰的，保证了数据的可见性。</p>
-<p>原理上来说：ConcurrentHashMap 采用了分段锁技术，其中 Segment 继承于 ReentrantLock。不会像 HashTable 那样不管是 put 还是 get 操作都需要做同步处理，理论上 ConcurrentHashMap 支持 CurrencyLevel (Segment 数组数量)的线程并发。每当一个线程占用锁访问一个 Segment 时，不会影响到其他的 Segment。</p>
-<p>jdk1.8抛弃了原有的segment锁，而使用CAS(Compare ans Swap) + synchronized的方式实现。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/ls19970727/CDN2/image/20210416191607.png"></p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>HashMap</tag>
       </tags>
   </entry>
   <entry>
